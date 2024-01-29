@@ -19,13 +19,14 @@ use App\Http\Controllers\ProductController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return Auth::check() ? redirect('/home') : redirect('/login');
 });
-  
+
 Auth::routes();
-  
+
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-  
+
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
