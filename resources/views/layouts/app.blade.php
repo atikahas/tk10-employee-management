@@ -153,75 +153,14 @@
     <script src="{{url('')}}/softui/assets/js/core/bootstrap.min.js"></script>
     <script src="{{url('')}}/softui/assets/js/plugins/perfect-scrollbar.min.js"></script>
     <script src="{{url('')}}/softui/assets/js/plugins/smooth-scrollbar.min.js"></script>
-
-    <script src="https://soft-ui-dashboard-pro-laravel.creative-tim.com/assets/js/plugins/dragula/dragula.min.js"></script>
-    <script src="https://soft-ui-dashboard-pro-laravel.creative-tim.com/assets/js/plugins/jkanban/jkanban.js"></script>
-    <script src="https://soft-ui-dashboard-pro-laravel.creative-tim.com/assets/js/plugins/choices.min.js"></script>
-    <script src="https://soft-ui-dashboard-pro-laravel.creative-tim.com/assets/js/plugins/quill.min.js"></script>
-    <script src="https://soft-ui-dashboard-pro-laravel.creative-tim.com/assets/js/plugins/flatpickr.min.js"></script>
-    <script src="https://soft-ui-dashboard-pro-laravel.creative-tim.com/assets/js/plugins/dropzone.min.js"></script>
-    <script>
-        if (document.getElementById('editor')) {
-        var quill = new Quill('#editor', {
-            theme: 'snow' 
-        });
-        }
-
-        if (document.getElementById('choices-multiple-remove-button')) {
-        var element = document.getElementById('choices-multiple-remove-button');
-        const example = new Choices(element, {
-            removeItemButton: true
-        });
-
-        example.setChoices(
-            [{
-                value: 'One',
-                label: 'Label One',
-                disabled: true
-            },
-            {
-                value: 'Two',
-                label: 'Label Two',
-                selected: true
-            },
-            {
-                value: 'Three',
-                label: 'Label Three'
-            },
-            ],
-            'value',
-            'label',
-            false,
-        );
-        }
-
-        if (document.querySelector('.datetimepicker')) {
-        flatpickr('.datetimepicker', {
-            allowInput: true
-        }); // flatpickr
-        }
-
-        Dropzone.autoDiscover = false;
-        var drop = document.getElementById('dropzone')
-        var myDropzone = new Dropzone(drop, {
-        url: "/file/post",
-        addRemoveLinks: true
-
-        });
-    </script>
-    <script>
-        var win = navigator.platform.indexOf('Win') > -1;
-        if (win && document.querySelector('#sidenav-scrollbar')) {
-        var options = {
-            damping: '0.5'
-        }
-        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-        }
-    </script>
-
+    <script src="{{url('')}}/softui/assets/js/plugins/dragula/dragula.min.js"></script>
+    <script src="{{url('')}}/softui/assets/js/plugins/jkanban/jkanban.js"></script>
+    <script src="{{url('')}}/softui/assets/js/plugins/choices.min.js"></script>
+    <script src="{{url('')}}/softui/assets/js/plugins/quill.min.js"></script>
+    <script src="{{url('')}}/softui/assets/js/plugins/flatpickr.min.js"></script>
+    <script src="{{url('')}}/softui/assets/js/plugins/dropzone.min.js"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-
     <script src="https://soft-ui-dashboard-pro-laravel.creative-tim.com/assets/js/soft-ui-dashboard.min.js?v=1.0.4"></script>
-    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v84a3a4012de94ce1a686ba8c167c359c1696973893317" integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA==" data-cf-beacon='{"rayId":"84b76f35d97787e1","version":"2024.1.0","token":"1b7cbb72744b40c580f8633c6b62637e"}' crossorigin="anonymous"></script>
+    @yield('script')
 </body>
 </html>
