@@ -84,10 +84,42 @@
                     <div class="collapse show" id="laravelExamples">
                         <ul class="nav ms-4 ps-3">
                             <li class="nav-item ">
-                                <a class="nav-link " href="https://soft-ui-dashboard-pro-laravel.creative-tim.com/laravel-user-profile">
-                                    <span class="sidenav-mini-icon"> L </span>
-                                    <span class="sidenav-normal"> Leave </span>
+                                <a class="nav-link " href="/">
+                                    <span class="sidenav-mini-icon"> T </span>
+                                    <span class="sidenav-normal"> Test </span>
                                 </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="collapse show" id="pagesExamples">
+                        <ul class="nav ms-4 ps-3">
+                            <li class="nav-item">
+                                <a class="nav-link @yield('l-active')" data-bs-toggle="collapse" aria-expanded="false" href="#profileExample">
+                                    <span class="sidenav-mini-icon"> L </span>
+                                    <span class="sidenav-normal"> Leave <b class="caret"></b></span>
+                                </a>
+                                <div class="collapse @yield('l-e-show')" id="profileExample">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item @yield('l-e-active')">
+                                            <a class="nav-link @yield('l-e-active')" href="{{url('leave-entitlement')}}">
+                                            <span class="sidenav-mini-icon text-xs"> E </span>
+                                            <span class="sidenav-normal"> Entitlement </span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item @yield('l-a-active')">
+                                            <a class="nav-link @yield('l-a-active')" href="/">
+                                            <span class="sidenav-mini-icon text-xs"> A </span>
+                                            <span class="sidenav-normal"> Application </span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item @yield('l-al-active')">
+                                            <a class="nav-link @yield('l-al-active')" href="/">
+                                            <span class="sidenav-mini-icon text-xs"> A </span>
+                                            <span class="sidenav-normal"> Approval </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -109,12 +141,6 @@
                     </a>
                 </div>
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4 justify-content-end" id="navbar">
-                    <div class="ms-md-3 pe-md-3 d-flex align-items-center">
-                        <div class="input-group">
-                            <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" placeholder="Type here...">
-                        </div>
-                    </div>
                     <ul class="navbar-nav  justify-content-end">
                         <li class="nav-item d-flex align-items-center">
                             <a href="{{ route('logout') }}" class="nav-link text-body font-weight-bold px-0"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();" >
@@ -124,6 +150,15 @@
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
+                        </li>
+                        <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                            <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                                <div class="sidenav-toggler-inner">
+                                    <i class="sidenav-toggler-line"></i>
+                                    <i class="sidenav-toggler-line"></i>
+                                    <i class="sidenav-toggler-line"></i>
+                                </div>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -149,6 +184,7 @@
         </footer> 
     </main>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{{url('')}}/softui/assets/js/core/popper.min.js"></script>
     <script src="{{url('')}}/softui/assets/js/core/bootstrap.min.js"></script>
     <script src="{{url('')}}/softui/assets/js/plugins/perfect-scrollbar.min.js"></script>
@@ -159,8 +195,8 @@
     <script src="{{url('')}}/softui/assets/js/plugins/quill.min.js"></script>
     <script src="{{url('')}}/softui/assets/js/plugins/flatpickr.min.js"></script>
     <script src="{{url('')}}/softui/assets/js/plugins/dropzone.min.js"></script>
+    <script src="{{url('')}}/softui/assets/js/plugins/datatables.js"></script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <script src="https://soft-ui-dashboard-pro-laravel.creative-tim.com/assets/js/soft-ui-dashboard.min.js?v=1.0.4"></script>
     @yield('script')
 </body>
 </html>
