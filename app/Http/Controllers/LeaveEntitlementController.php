@@ -35,10 +35,29 @@ class LeaveEntitlementController extends Controller
         try{
             $data = $request->all();
             $data['created_by'] = Auth::user()->id;
-            // dd($data);
             $le = LeaveEntitlement::create($data);
 
             return redirect('leave-entitlement/view/'.$request->user_id)->with('success', 'New Leave Entitle Added.');
+        } catch(\Exception $e) {
+            dd($e);
+            return back()->with('error', $e->getMessage())->withInput();
+        }
+    }
+
+    public function edit(LeaveEntitlement $le){
+        $user = User::where('id', $le->user_id)->first();
+
+        return view('leave.entitlement.edit', compact('le', 'user'));
+    }
+
+    public function update(Request $request, LeaveEntitlement $le) {
+        try {
+            $data = $request->except(['_token']);
+            $data = array_filter($request->all());
+            $data['updated_by'] = Auth::user()->id;
+            $le->update($data);
+            
+            return back()->with('success', 'Leaves Updated.');
         } catch(\Exception $e) {
             dd($e);
             return back()->with('error', $e->getMessage())->withInput();

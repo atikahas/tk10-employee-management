@@ -70,8 +70,8 @@
                                 <td>{{ $e->leaves_earned }}</td>
                                 <td>{{ $e->leaves_ml_earned }}</td>
                                 <td>
-                                    <a href="{{url('leave-entitlement/edit/'.$e->id)}}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit">
-                                    <i class="fas fa-edit text-secondary"></i>
+                                    <a href="{{url('leave-entitlement/edit/'.$e->id)}}" class="mx-3 btn bg-gradient-primary" data-bs-toggle="tooltip" data-bs-original-title="Edit">
+                                    <i class="fas fa-edit"></i>
                                     </a>
                                 </td>
                             </tr>
@@ -89,27 +89,34 @@
     <script>
         if (document.getElementById('leaves-list')) {
             const dataTableSearch = new simpleDatatables.DataTable("#leaves-list", {
-            searchable: true,
-            fixedHeight: false,
-            perPage: 7
+                searchable: true,
+                fixedHeight: false,
+                perPage: 7
             });
 
             document.querySelectorAll(".export").forEach(function(el) {
-            el.addEventListener("click", function(e) {
-                var type = el.dataset.type;
+                el.addEventListener("click", function(e) {
+                    var type = el.dataset.type;
+                    var data = {
+                        type: type,
+                        filename: "soft-ui-" + type,
+                    };
 
-                var data = {
-                type: type,
-                filename: "soft-ui-" + type,
-                };
+                    if (type === "csv") {
+                        data.columnDelimiter = "|";
+                    }
 
-                if (type === "csv") {
-                data.columnDelimiter = "|";
-                }
-
-                dataTableSearch.export(data);
-            });
+                    dataTableSearch.export(data);
+                });
             });
         };
+
+        @if(Session::has('success'))
+            toastr.success("{{ Session::get('success') }}");
+        @endif
+
+        @if(Session::has('error'))
+            toastr.error("{{ Session::get('error') }}");
+        @endif
     </script>
 @endsection

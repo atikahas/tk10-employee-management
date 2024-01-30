@@ -29,13 +29,13 @@
                             <td>{{ $u->email }}</td>
                             <td>
                                 @foreach ($u->getRoleNames() as $roleName)
-                                    <span class="badge bg-dark">{{ $roleName }}</span>
+                                    <span class="badge bg-gradient-dark">{{ $roleName }}</span>
                                 @endforeach
                             </td>
                             <td>{{ $u->created_at->toFormattedDateString() }}</td>
                             <td>
-                                <a href="{{url('leave-entitlement/view/'.$u->id)}}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit user">
-                                <i class="fas fa-edit text-secondary"></i>
+                                <a href="{{url('leave-entitlement/view/'.$u->id)}}" class="mx-3 btn bg-gradient-primary" data-bs-toggle="tooltip" data-bs-original-title="Edit user">
+                                <i class="fas fa-edit"></i>
                                 </a>
                             </td>
                         </tr>

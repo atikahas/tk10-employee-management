@@ -1,60 +1,87 @@
 @extends('layouts.app')
-
+@section('a-users', 'active')
 
 @section('content')
 <div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Users Management</h2>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-success" href="{{ route('users.create') }}"> Create New User</a>
+    <div class="col-lg-12 col-12 mx-auto">
+        <div class="card card-body mt-4">
+            <h5 class="mb-0">All Users</h5>
+            <div class="table-responsive">
+                <table class="table table-flush text-sm" id="users-list">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>#</th>
+                            <th>ID</th>
+                            <th>NAME</th>
+                            <th>EMAIL</th>
+                            <th>ROLE</th>
+                            <th>CREATION DATE</th>
+                            <th>ACTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ( $data as $key => $u )
+                        <tr>
+                            <td>{{ ++$i }}</td>
+                            <td>AGA000{{  $u->id }}</td>
+                            <td>{{ $u->name }}</td>
+                            <td>{{ $u->email }}</td>
+                            <td>
+                                @foreach ($u->getRoleNames() as $roleName)
+                                    <span class="badge bg-gradient-dark">{{ $roleName }}</span>
+                                @endforeach
+                            </td>
+                            <td>{{ $u->created_at->toFormattedDateString() }}</td>
+                            <td>
+                                <a class="btn bg-gradient-info" href="{{ route('users.show',$u->id) }}"><i class="fas fa-eye"></i></a>
+                                <a class="btn bg-gradient-primary" href="{{ route('users.edit',$u->id) }}"><i class="fas fa-edit"></i></a>
+                                {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $u->id],'style'=>'display:inline']) !!}
+                                    <button type="submit" class="btn bg-gradient-danger" onclick="return confirm('Are you sure?')"><i class="fas fa-trash"></i></button>
+                                {!! Form::close() !!}
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>    
+                </table>
+            </div>
         </div>
     </div>
 </div>
+@endsection
 
+@section('script')
+    <script>
+        if (document.getElementById('users-list')) {
+            const dataTableSearch = new simpleDatatables.DataTable("#users-list", {
+            searchable: true,
+            fixedHeight: false,
+            perPage: 7
+            });
 
-@if ($message = Session::get('success'))
-<div class="alert alert-success">
-  {{ $message }}
-</div>
-@endif
+            document.querySelectorAll(".export").forEach(function(el) {
+            el.addEventListener("click", function(e) {
+                var type = el.dataset.type;
 
+                var data = {
+                type: type,
+                filename: "soft-ui-" + type,
+                };
 
-<table class="table table-bordered">
- <tr>
-   <th>No</th>
-   <th>Name</th>
-   <th>Email</th>
-   <th>Roles</th>
-   <th width="280px">Action</th>
- </tr>
- @foreach ($data as $key => $user)
-  <tr>
-    <td>{{ ++$i }}</td>
-    <td>{{ $user->name }}</td>
-    <td>{{ $user->email }}</td>
-    <td>
-      @if(!empty($user->getRoleNames()))
-        @foreach($user->getRoleNames() as $v)
-           <label class="badge bg-success">{{ $v }}</label>
-        @endforeach
-      @endif
-    </td>
-    <td>
-       <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
-       <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
-        {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
-            {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-        {!! Form::close() !!}
-    </td>
-  </tr>
- @endforeach
-</table>
+                if (type === "csv") {
+                data.columnDelimiter = "|";
+                }
 
+                dataTableSearch.export(data);
+            });
+            });
+        };
 
-{!! $data->render() !!}
+        @if(Session::has('success'))
+            toastr.success("{{ Session::get('success') }}");
+        @endif
 
-
-<p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>
+        @if(Session::has('error'))
+            toastr.error("{{ Session::get('error') }}");
+        @endif
+    </script>
 @endsection

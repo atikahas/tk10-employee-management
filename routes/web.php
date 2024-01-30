@@ -26,5 +26,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('leave-entitlement/view/{user}', [LeaveEntitlementController::class, 'view'])->name('le.view');
     Route::get('leave-entitlement/create/{user}', [LeaveEntitlementController::class, 'create'])->name('le.create');
     Route::post('leave-entitlement/create', [LeaveEntitlementController::class, 'store'])->name('le.store');
+    Route::get('leave-entitlement/edit/{le}', [LeaveEntitlementController::class, 'edit'])->name('le.edit');
+    Route::post('leave-entitlement/edit/{le}', [LeaveEntitlementController::class, 'update'])->name('le.update');
 
 });
