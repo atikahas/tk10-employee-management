@@ -37,10 +37,10 @@
 <div class="row">
     <div class="col-lg-12 col-12 mx-auto">
         <div class="card mt-4">
-            <div class="card-header">
+            <div class="card-header pb-0">
                 <div class="d-lg-flex">
                     <div>
-                        <h5 class="mb-0">List Leave Entitlement</h5>
+                        <h5 class="mb-0">List Leave</h5>
                         <p class="text-sm mb-0">Overview of the yearly annual leave entitlement for staff.</p>
                     </div>
                     <div class="ms-auto my-auto mt-lg-0 mt-4">
@@ -52,7 +52,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body px-0 pb-0">
+            <div class="card-body px-0 pb-0 pt-0">
                 <div class="table-responsive">
                     <table class="table table-flush text-sm" id="leaves-list">
                         <thead class="thead-light">
@@ -70,7 +70,7 @@
                                 <td>{{ $e->leaves_earned }}</td>
                                 <td>{{ $e->leaves_ml_earned }}</td>
                                 <td>
-                                    <a href="{{url('leave-entitlement/edit/'.$e->id)}}" class="mx-3 btn bg-gradient-primary" data-bs-toggle="tooltip" data-bs-original-title="Edit">
+                                    <a href="{{url('leave-entitlement/edit/'.$e->id)}}" class="mx-3 btn bg-gradient-secondary" data-bs-toggle="tooltip" data-bs-original-title="Edit">
                                     <i class="fas fa-edit"></i>
                                     </a>
                                 </td>
